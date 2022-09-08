@@ -18,6 +18,8 @@ interface Favorito {
 })
 export class DinamicsComponent {
 
+  newGame: string = '';
+
   persona : Persona ={
     nombre:'Menta',
     favoritos:[
@@ -26,6 +28,18 @@ export class DinamicsComponent {
       {id:2, nombre:'Scrabble'},
 
     ]
+  }
+
+  addGame(){
+    const newFavorite : Favorito = {
+      id: this.persona.favoritos.length +1,
+      nombre : this.newGame
+    }
+this.persona.favoritos.push(newFavorite)
+  }
+
+  delete(index : number){
+    this.persona.favoritos.splice(index,1)
   }
 
   save(){
