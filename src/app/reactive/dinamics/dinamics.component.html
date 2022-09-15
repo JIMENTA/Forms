@@ -1,1 +1,42 @@
-<p>dinamics works!</p>
+<h2>Reactivos: <small> Dinamicos</small></h2>
+<hr>
+
+<form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="save()">
+
+    <div class=" mb-3 row">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input class="form-control" formControlName="name" placeholder="Nombre de la persona">
+            <span class="form-text text-danger" *ngIf="invalidField('name')"> Este campo es obligatorio</span>
+        </div>
+    </div>
+
+    <div class=" mb-3 row">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+
+                <input class="form-control" [formControl]="newFavorite" placeholder="Agregar favorito" (keyup.enter)="addFavorite()">
+                <button class="btn btn-outline-primary" (click)="addFavorite()">Agregar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class=" mb-3 row">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9" formArrayName="favorites">
+            <div class="input-group" mb-1 *ngFor="let fav of favoritesArr.controls; let i= index">
+                <input class="form-control" [formControlName]="i">
+
+                <button class="btn btn-outline-danger" type="button" (click)="delete(i)">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class="col-sm-12">
+            <button type="button" class="btn btn-primary float-end" type="submit" (click)="save()"> Guardar</button>
+        </div>
+
+    </div>
